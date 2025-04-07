@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Discord Clone</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+    <button class="logo-button" onclick="redirectToHomepage()">Discord Clone</button>
+</div>
+<div class="container">
+  <h1>Welcome to Discord Clone</h1>
+  <div class="homepage-buttons">
+      <button class="edit-profile-button" onclick="redirectToLogin()">Login</button>
+      <button class="edit-profile-button" onclick="redirectToRegister()">Register</button>
+  </div>
+</div>
+
+<script>
+    // Redirect to dashboard if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+        if (token && userId) {
+            window.location.href = '/dashboard.html'; // Redirect to dashboard
+        }
+    });
+
+    function redirectToHomepage() {
+        window.location.href = '/index.html';
+    }
+
+    function redirectToLogin() {
+        window.location.href = '/login.html';
+    }
+
+    function redirectToRegister() {
+        window.location.href = '/register.html';
+    }
+</script>
+</body>
+</html>

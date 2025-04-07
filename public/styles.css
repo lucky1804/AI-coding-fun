@@ -1,0 +1,275 @@
+/* Header Styling */
+.header {
+    width: 100%;
+    background-color: #23272a; /* Dark header background */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between logo and logout button */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo Button Styling */
+.logo-button {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    cursor: pointer;
+}
+
+.logo-button:hover {
+    color: #7289da; /* Discord-like blue on hover */
+}
+
+.logo-button:focus {
+    outline: none; /* Remove focus outline */
+}
+
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2c2f33; /* Dark background */
+    color: #ffffff; /* White text */
+}
+
+/* Container Styling */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #23272a; /* Slightly lighter dark background */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Container */
+.profile-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Username Styling */
+#profileUsername {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Avatar Frame Styling */
+.avatar-frame {
+    display: inline-block; /* Ensure no stretching occurs */
+    padding: 5px;
+    border: 2px solid #7289da; /* Discord-like blue border */
+    border-radius: 50%; /* Circular frame around avatar */
+}
+
+.profile-avatar {
+    width: 100px; /* Smaller avatar size */
+    height: 100px; /* Ensure equal width and height for circular shape */
+    border-radius: 50%; /* Make avatar circular */
+    object-fit: cover; /* Ensure image fits properly without distortion */
+    cursor: pointer; /* Make it clickable */
+}
+
+.profile-avatar:hover {
+    opacity: 0.8; /* Slight opacity effect on hover */
+}
+
+/* About Me Section Styling */
+.about-frame {
+    background-color: #2c2f33; /* Darker frame background */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners for the frame */
+    border: 1px solid #7289da; /* Discord-like blue border */
+}
+
+.about-frame h3 {
+    margin-top: 0;
+}
+
+.about-frame p {
+    font-size: 16px;
+    color: #cccccc; /* Lighter text for readability */
+}
+
+/* Edit Profile Button Styling */
+.edit-profile-button {
+    background-color: #7289da; /* Discord-like blue */
+    color: #ffffff; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.edit-profile-button:hover {
+    background-color: #5a6fb8; /* Darker blue on hover */
+}
+
+/* Editable About Me Section Styling */
+.about-frame textarea {
+    width: calc(100% - 30px); /* Match frame padding */
+    height: 100px;
+    background-color: #2c2f33; /* Same as frame background */
+    color: #ffffff; /* White text */
+    border: none; /* No border */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners for consistency with the frame style */
+}
+
+.about-frame textarea:focus {
+    outline: none; /* Remove focus outline for a cleaner look */
+}
+
+/* File Input Styling (Hidden) for Avatar Uploads*/
+#avatarInput {
+    display: none; 
+}
+/* Edit Profile and View Profile Button Styling */
+.edit-profile-button {
+    background-color: #7289da; /* Discord-like blue */
+    color: #ffffff; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for a consistent size */
+    font-size: 16px; /* Slightly larger text for better readability */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 10px; /* Add spacing between elements */
+}
+
+.edit-profile-button:hover {
+    background-color: #5a6fb8; /* Darker blue on hover */
+}
+/* Bottom-left Frame Styling */
+.bottom-left-frame {
+    position: fixed; /* Fixed position in the bottom-left corner */
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #23272a; /* Dark background */
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners for the frame */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+/* Small Avatar Styling */
+.small-avatar {
+    width: 40px; /* Smaller size for the avatar */
+    height: 40px;
+    border-radius: 50%; /* Circular shape */
+    object-fit: cover; /* Ensure proper image fit */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    margin-right: 10px; /* Spacing between avatar and settings button */
+}
+
+/* Settings Button Styling */
+.settings-button {
+    background-color: transparent; /* Transparent background */
+    color: #ffffff; /* White text/icon */
+    font-size: 20px; /* Larger icon size for visibility */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+.settings-button:hover {
+    color: #7289da; /* Discord-like blue hover effect */
+}
+
+.settings-button:focus {
+    outline: none; /* Remove focus outline for cleaner design */
+}
+/* Bottom-left Frame Styling */
+.bottom-left-frame {
+    position: fixed; /* Fixed position in the bottom-left corner */
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #23272a; /* Dark background */
+    padding: 10px;
+    border-radius: 1px; /* Rounded corners for the frame */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.small-avatar {
+/* Small Avatar Styling */
+    width: 40px; /* Smaller size for the avatar */
+    height: 40px;
+    border-radius: 50%; /* Circular shape */
+    object-fit: cover; /* Ensure proper image fit */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    margin-right: 120px; /* Spacing between avatar and settings button */
+}
+
+/* Settings Button Styling */
+.settings-button {
+    background-color: transparent; /* Transparent background */
+    color: #ffffff; /* White text/icon */
+    font-size: 20px; /* Larger icon size for visibility */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+.settings-button:hover {
+    color: #7289da; /* Discord-like blue hover effect */
+}
+
+.settings-button:focus {
+    outline: none; /* Remove focus outline for cleaner design */
+}
+
+/* Logo Button Styling */
+.logo-button {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+}
+
+.logo-button:hover {
+    color: #7289da; /* Discord-like blue on hover */
+}
+
+.logo-button:focus {
+    outline: none; /* Remove focus outline */
+}
+
+/* Logout Button Styling */
+.logout-button {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    background-color: #7289da; /* Discord-like blue */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px 10px; /* Padding for consistent size */
+}
+
+.logout-button:hover {
+    background-color: #5a6fb8; /* Darker blue on hover */
+}
+
+.logout-button:focus {
+    outline: none; /* Remove focus outline */
+}/* Small Text Styling */
+.small-text {
+    font-size: 14px;
+    color: #cccccc; /* Light gray text */
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Link Text Styling */
+.link-text {
+    color: #7289da; /* Discord-like blue */
+    text-decoration: none; /* Remove underline */
+}
+
+.link-text:hover {
+    text-decoration: underline; /* Add underline on hover */
+}

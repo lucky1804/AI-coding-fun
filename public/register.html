@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Register</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+    <button class="logo-button" onclick="redirectToHomepage()">Discord Clone</button>
+</div>
+<div class="container">
+  <h1>Register for Discord Clone</h1>
+  <div class="auth-section">
+      <input type="text" id="registerUsername" placeholder="Username">
+      <input type="password" id="registerPassword" placeholder="Password">
+      <button class="edit-profile-button" onclick="register()">Register</button>
+      <!-- New clickable text below the register button -->
+      <p class="small-text">
+          Already have an account? 
+          <a href="/login.html" class="link-text">Login here</a>
+      </p>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    // Redirect to dashboard if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+        if (token && userId) {
+            window.location.href = '/dashboard.html'; // Redirect to dashboard
+        }
+    });
+
+    function redirectToHomepage() {
+        window.location.href = '/index.html';
+    }
+
+    function register() {
+        const username = document.getElementById('registerUsername').value;
+        const password = document.getElementById('registerPassword').value;
+
+        fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .catch(err => console.error('Registration failed:', err));
+    }
+</script>
+</body>
+</html>

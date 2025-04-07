@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+    <button class="logo-button" onclick="redirectToHomepage()">Discord Clone</button>
+</div>
+<div class="container">
+  <h1>Login to Discord Clone</h1>
+  <div class="auth-section">
+      <input type="text" id="loginUsername" placeholder="Username">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <button class="edit-profile-button" onclick="login()">Login</button>
+      <!-- New clickable text below the login button -->
+      <p class="small-text">
+          Don't have an account yet? 
+          <a href="/register.html" class="link-text">Register here</a>
+      </p>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    // Redirect to dashboard if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+        if (token && userId) {
+            window.location.href = '/dashboard.html'; // Redirect to dashboard
+        }
+    });
+
+    function redirectToHomepage() {
+        window.location.href = '/index.html';
+    }
+
+    function login() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+
+        fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                alert(`Error: ${data.error}`);
+            } else {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.user.id); // Save user ID for future requests
+                window.location.href = '/dashboard.html'; // Redirect to dashboard
+            }
+        })
+        .catch(err => console.error('Login failed:', err));
+    }
+</script>
+</body>
+</html>

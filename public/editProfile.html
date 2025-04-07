@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">
+    <button class="logo-button" onclick="redirectToDashboard()">Discord Clone</button>
+    <button class="logout-button" onclick="logout()">Logout</button>
+</div>
+<div class="container">
+  <h1>Edit Your Profile</h1>
+  <div class="profile-container">
+      <h2 id="profileUsername">Username</h2>
+      <div class="avatar-frame">
+          <img id="profileAvatar" src="/default-avatar.png" alt="User Avatar" class="profile-avatar" onclick="triggerFileInput()">
+          <input type="file" id="avatarInput" name="avatar" style="display: none;">
+      </div>
+      <div class="about-frame">
+          <h3>About Me</h3>
+          <textarea id="aboutInput"></textarea>
+      </div>
+      <!-- Save Changes Button -->
+      <button id="saveProfileButton" class="edit-profile-button">Save Changes</button>
+  </div>
+
+<!-- Bottom-left corner frame -->
+<div class="bottom-left-frame">
+    <img id="smallAvatar" src="/default-avatar.png" alt="User Avatar" class="small-avatar" onclick="viewProfile()">
+    <button id="settingsButton" class="settings-button">⚙️</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="./editProfile.js"></script> <!-- Logic for editing profile -->
+<script src="./shared.js"></script> <!-- Shared logic for avatar and settings -->
+<script>
+    // Redirect to login page if user is not logged in
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+        if (!token || !userId) {
+            window.location.href = '/login.html'; // Redirect to login page
+        }
+    });
+
+    function redirectToDashboard() {
+        window.location.href = '/dashboard.html';
+    }
+
+    function logout() {
+        localStorage.clear(); // Clear user session
+        window.location.href = '/index.html'; // Redirect to homepage
+    }
+
+    function triggerFileInput() {
+        document.getElementById('avatarInput').click();
+    }
+
+    function viewProfile() {
+        window.location.href = '/profile.html';
+    }
+</script>
+</body>
+</html>
