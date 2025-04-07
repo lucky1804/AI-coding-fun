@@ -7,6 +7,35 @@ const router = express.Router();
 // Configure multer for avatar uploads
 const upload = multer({ dest: 'public/uploads/' });
 
+// 🔍 Search for users by username — moved to top to avoid route collision
+router.get('/search', (req, res) => {
+    console.log('Search endpoint hit'); // Debugging log
+
+    const searchTerm = req.query.q;
+
+    if (!searchTerm) {
+        console.log('No search term provided');
+        return res.status(400).json({ error: 'Search term is required' });
+    }
+
+    const query = `
+        SELECT id, username, profile_picture
+        FROM users
+        WHERE username LIKE ?
+        LIMIT 10
+    `;
+
+    db.query(query, [`%${searchTerm}%`], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: err.message });
+        }
+
+        console.log('Search results:', results); // Debugging line
+        res.status(200).json(results || []);
+    });
+});
+
 // Get user's friends
 router.get('/:id/friends', (req, res) => {
     const query = `
@@ -39,13 +68,11 @@ router.post('/:id/profile', upload.single('avatar'), (req, res) => {
     const { about } = req.body;
     const userId = req.params.id;
 
-    // Check if an avatar was uploaded
     let avatarPath = null;
     if (req.file) {
         avatarPath = `/uploads/${req.file.filename}`;
     }
 
-    // Update query logic: Preserve existing avatar if no new one is uploaded
     const query = `
         UPDATE users
         SET about = ?, profile_picture = COALESCE(?, profile_picture)
@@ -59,32 +86,20 @@ router.post('/:id/profile', upload.single('avatar'), (req, res) => {
 
 // Get user profile by ID
 router.get('/:id', (req, res) => {
+    const userId = req.params.id;
+    console.log(`Fetching user with id: ${userId}`); // Debugging
+
     const query = 'SELECT id, username, about, profile_picture FROM users WHERE id = ?';
-    db.query(query, [req.params.id], (err, results) => {
-        if (err || results.length === 0)
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error('DB error:', err);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        if (results.length === 0) {
+            console.warn(`No user found with id ${userId}`);
             return res.status(404).json({ error: 'User not found' });
+        }
         res.status(200).json(results[0]);
-    });
-});
-
-// Search for users by username
-router.get('/search', (req, res) => {
-    const searchTerm = req.query.q; // Get the search term from the query string
-
-    if (!searchTerm) {
-        return res.status(400).json({ error: 'Search term is required' });
-    }
-
-    const query = `
-        SELECT id, username, profile_picture
-        FROM users
-        WHERE username LIKE ?
-        LIMIT 10
-    `;
-    
-    db.query(query, [`%${searchTerm}%`], (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.status(200).json(results);
     });
 });
 
