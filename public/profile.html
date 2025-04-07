@@ -22,6 +22,7 @@
           <h3>About Me</h3>
           <p id="profileAbout">This user has not written anything about themselves.</p>
       </div>
+
       <!-- Edit Profile Button -->
       <button id="editProfileButton" class="edit-profile-button" style="display: none;" onclick="redirectToEditProfile()">Edit Profile</button>
   </div>
@@ -61,6 +62,25 @@
     function viewProfile() {
         window.location.href = '/profile.html';
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('user') || localStorage.getItem('userId'); // Use logged-in user's ID if no query param
+
+        fetch(`/api/users/${userId}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('profileUsername').textContent = data.username;
+                document.getElementById('profileAvatar').src = data.profile_picture || '/default-avatar.png';
+                document.getElementById('profileAbout').textContent = data.about || 'This user has not written anything about themselves.';
+                
+                // Hide "Edit Profile" button if viewing another user's profile
+                if (userId !== localStorage.getItem('userId')) {
+                    document.getElementById('editProfileButton').style.display = 'none';
+                }
+            })
+            .catch(err => console.error('Failed to load profile:', err));
+    });
 </script>
 </body>
 </html>

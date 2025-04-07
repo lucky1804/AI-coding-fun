@@ -10,9 +10,9 @@ const upload = multer({ dest: 'public/uploads/' });
 // Get user's friends
 router.get('/:id/friends', (req, res) => {
     const query = `
-        SELECT users.id, users.username, users.profile_picture 
-        FROM friends 
-        JOIN users ON friends.friend_id = users.id 
+        SELECT users.id, users.username, users.profile_picture
+        FROM friends
+        JOIN users ON friends.friend_id = users.id
         WHERE friends.user_id = ? AND friends.status = 'accepted'
     `;
     db.query(query, [req.params.id], (err, results) => {
@@ -24,8 +24,8 @@ router.get('/:id/friends', (req, res) => {
 // Get user's chatrooms
 router.get('/:id/chatrooms', (req, res) => {
     const query = `
-        SELECT chatrooms.id, chatrooms.name, chatrooms.avatar 
-        FROM chatrooms 
+        SELECT chatrooms.id, chatrooms.name, chatrooms.avatar
+        FROM chatrooms
         WHERE chatrooms.created_by = ?
     `;
     db.query(query, [req.params.id], (err, results) => {
@@ -47,7 +47,7 @@ router.post('/:id/profile', upload.single('avatar'), (req, res) => {
 
     // Update query logic: Preserve existing avatar if no new one is uploaded
     const query = `
-        UPDATE users 
+        UPDATE users
         SET about = ?, profile_picture = COALESCE(?, profile_picture)
         WHERE id = ?
     `;
@@ -63,10 +63,29 @@ router.get('/:id', (req, res) => {
     db.query(query, [req.params.id], (err, results) => {
         if (err || results.length === 0)
             return res.status(404).json({ error: 'User not found' });
-
         res.status(200).json(results[0]);
     });
 });
 
+// Search for users by username
+router.get('/search', (req, res) => {
+    const searchTerm = req.query.q; // Get the search term from the query string
+
+    if (!searchTerm) {
+        return res.status(400).json({ error: 'Search term is required' });
+    }
+
+    const query = `
+        SELECT id, username, profile_picture
+        FROM users
+        WHERE username LIKE ?
+        LIMIT 10
+    `;
+    
+    db.query(query, [`%${searchTerm}%`], (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.status(200).json(results);
+    });
+});
 
 module.exports = router;

@@ -15,6 +15,12 @@
   <h1>Welcome to Your Dashboard</h1>
   <button id="viewProfileButton" class="edit-profile-button" onclick="viewProfile()">View My Profile</button>
 
+  <h2>Search Users</h2>
+  <div class="search-section">
+      <input type="text" id="userSearchInput" placeholder="Search for users..." oninput="searchUsers()">
+      <div id="searchResults"></div>
+  </div>
+
   <h2>Your Friends</h2>
   <div id="friends"></div>
 
@@ -32,15 +38,6 @@
 <script src="./dashboard.js"></script>
 <script src="./shared.js"></script> <!-- Shared logic for avatar and settings -->
 <script>
-    // Redirect to login page if user is not logged in
-    document.addEventListener('DOMContentLoaded', () => {
-        const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
-        if (!token || !userId) {
-            window.location.href = '/login.html'; // Redirect to login page
-        }
-    });
-
     function redirectToDashboard() {
         window.location.href = '/dashboard.html';
     }

@@ -1,2 +1,1 @@
-# AI-coding-fun
-XD
+Probably not anything usable, just a repo where im testing how good AI is at writing code.

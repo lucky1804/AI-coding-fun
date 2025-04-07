@@ -273,3 +273,31 @@ body {
 .link-text:hover {
     text-decoration: underline; /* Add underline on hover */
 }
+/* Search Section Styling */
+.search-section {
+    margin-top: 20px;
+}
+
+#userSearchInput {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#searchResults {
+    margin-top: 10px;
+}
+
+.user-result {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
